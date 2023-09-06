@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 100px;
+            height: 100vh;
+        }
+        .head {
+            border: 2px solid yellow;
+            background-color: aqua;
+            color: blue;
+            position: static;
+        }
+        .cont {
+            border: 2px solid blue;
+            background-color: aqua;
+            color: blue;
+            height: 100%;
+            position: absolute;
+        }
+        #headerr {
+            top: 100%;
+        }
+        #sidebar {
+            width: 30%;
+        }
+        #content {
+            left: 30%;
+            width: 70%;
+        }
+    </style>
+</head>
+<body>
+    <div class = "head" id = "headerr">Header</div>
+    <div class = "cont" id = "sidebar">Sider</div>
+    <div class = "cont" id = "content">cont</div>
+</body>
+</html>

@@ -1,5 +1,15 @@
 # Apuntes de Clase
 
+### Operaciones de relacion en CSS
+
+Operadores de decendencia
+Div o P {=}
+Div > P {=}
+
+### Operadores de Hermandad
+Hermano adyacente: Div + P {=}  
+Div ~ P {=}
+
 ### Posicionamiento de Cajas
 
 |Position         | Donde se coloca           | Que va a pasar con su espacio|
