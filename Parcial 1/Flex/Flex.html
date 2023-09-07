@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { 
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
+        .contenedor {
+            height: 100vh;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+        }
+        .caja{
+            width: 200px;
+            height: 100px;
+            background-color: crimson;
+            border: 1px solid black;
+            color: azure;
+        }
+        #caja1 { flex-grow: 1; }
+        #caja2 { flex-grow: 2; }
+        #caja3 { flex-grow: 1; }
+        #caja4 { flex-grow: 1; }
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="caja" id="caja1">Caja1</div>
+        <div class="caja" id="caja2">Caja2</div>
+        <div class="caja" id="caja3">Caja3</div>
+        <div class="caja" id="caja4">Caja4</div>
+        <div class="caja" id="caja5">Caja5</div>
+        <div class="caja" id="caja6">Caja6</div>
+        <div class="caja" id="caja7">Caja7</div>
+        <div class="caja" id="caja8">Caja8</div>
+        <div class="caja" id="caja9">Caja9</div>
+        <div class="caja" id="caja10">Caja10</div>
+    </div>
+</body>
+</html>
