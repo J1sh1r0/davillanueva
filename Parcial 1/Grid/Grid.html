@@ -13,24 +13,29 @@
         
         .contenedor {
             height: 100vh;
-            display: flex;
-            flex-direction: row;
-            flex-wrap: wrap;
+            width: 100vw;
+            background-color: blue;
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+            grid-template-rows: 25% 50% 25%;
             justify-content: center;
-            align-content: center;
             align-items: center;
+            justify-items: stretch;
         }
         .caja{
-            width: 200px;
+           /* width: 100px;*/
             height: 100px;
             background-color: crimson;
             border: 1px solid black;
             color: azure;
         }
-        #caja1 { flex-grow: 1; }
-        #caja2 { flex-grow: 2; }
-        #caja3 { flex-grow: 1; }
-        #caja4 { flex-grow: 1; }
+
+        #caja1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            align-self: start;
+        }
+
     </style>
 </head>
 <body>
@@ -41,10 +46,6 @@
         <div class="caja" id="caja4">Caja4</div>
         <div class="caja" id="caja5">Caja5</div>
         <div class="caja" id="caja6">Caja6</div>
-        <div class="caja" id="caja7">Caja7</div>
-        <div class="caja" id="caja8">Caja8</div>
-        <div class="caja" id="caja9">Caja9</div>
-        <div class="caja" id="caja10">Caja10</div>
     </div>
 </body>
 </html>
