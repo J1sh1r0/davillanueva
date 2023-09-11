@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * { 
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        }
+        
+        .contenedor {
+            height: 100vh;
+            width: 100vw;
+            background-color: blue;
+
+            display: grid;
+            grid-template-columns: 25% 50% 25%;
+            grid-template-rows: 25% 50% 25%;
+            grid-template-areas: 'enca enca enca'
+                                 'col1 col2 col3'
+                                 'plet plet plet';
+
+            /*justify-content: center;*/
+
+            align-items: stretch;
+            justify-items: stretch;
+        }
+        .caja{
+           /* width: 100px;*/
+            /*height: 100px;*/
+            background-color: crimson;
+            border: 1px solid black;
+            color: azure;
+        }
+
+        #caja1 {grid-area: enca;}
+        #caja2 {grid-area: col1;}
+        #caja3 {grid-area: col2;}
+        #caja4 {grid-area: col3;}
+        #caja5 {grid-area: plet;}
+
+       /* #caja1 {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            align-self: start;
+        }*/
+
+    </style>
+</head>
+<body>
+    <div class="contenedor">
+        <div class="caja" id="caja1">Caja1</div>
+        <div class="caja" id="caja2">Caja2</div>
+        <div class="caja" id="caja3">Caja3</div>
+        <div class="caja" id="caja4">Caja4</div>
+        <div class="caja" id="caja5">Caja5</div>
+        <div class="caja" id="caja6">Caja6</div>
+    </div>
+</body>
+</html>
