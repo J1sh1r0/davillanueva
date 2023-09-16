@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style> 
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            width: 100vw;
+            height: 100vh;
+        }
+        .head {
+            border: 2px solid yellow;
+            background-color: aqua;
+            color: blue;
+            text-align: center;
+        }
+        .cont {
+            border: 2px solid blue;
+            background-color: aqua;
+            color: blue;
+            height: 100%;
+            position: absolute;
+        }
+
+        #sidebar {
+            width: 30%;
+        }
+        #content {
+            left: 30%;
+            width: 70%;
+        }
+        input#togle{
+            display: none;
+        }
+        input:checked + div#sidebar{
+            display: none;
+        }
+        input:checked ~ div#content{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="head" id="headerr"><center>Header</center></div> 
+    <input id="toggle" type="checkbox">
+    <div class="cont" id="sidebar"><center>Sidebar</center></div>
+    <div class="cont" id="content">
+        <label for="togle">Menu</label>
+        <center>Content</center>
+    </div>
+</body>
+</html>
