@@ -14,8 +14,11 @@
     }
     :root {
         --color-primario: gray;
-        --color-secundario: green;
+        --color-secundario: darkblue;
         --color: white;
+    }
+    body:has(input:checked){
+        background-color: var(--color-secundario);
     }
     input:checked + div#contenedor{
         color: var(--color);
