@@ -14,44 +14,44 @@
             width: 100vw;
             height: 100vh;
         }
-        .head {
-            border: 2px solid yellow;
-            background-color: aqua;
-            color: blue;
+        .header1 {
+            border: 2px solid burlywood;
+            background-color: brown;
+            color: black;
             text-align: center;
         }
         .cont {
-            border: 2px solid blue;
-            background-color: aqua;
-            color: blue;
+            border: 2px solid burlywood;
+            background-color: brown;
+            color: black;
             height: 100%;
             position: absolute;
         }
 
-        #sidebar {
+        #sidebar1 {
             width: 30%;
         }
-        #content {
+        #content1 {
             left: 30%;
             width: 70%;
         }
-        input#togle{
+        input#toggle{
             display: none;
         }
-        input:checked + div#sidebar{
+        input:checked + div#sidebar1{
             display: none;
         }
-        input:checked ~ div#content{
+        input:checked ~ div#content1{
             width: 100%;
         }
     </style>
 </head>
 <body>
-    <div class="head" id="headerr"><center>Header</center></div> 
+    <div class="header1" id="header2"><center>Header</center></div> 
     <input id="toggle" type="checkbox">
-    <div class="cont" id="sidebar"><center>Sidebar</center></div>
-    <div class="cont" id="content">
-        <label for="togle">Menu</label>
+    <div class="cont" id="sidebar1"><center>Sidebar</center></div>
+    <div class="cont" id="content1">
+        <label for="toggle">Menu</label>
         <center>Content</center>
     </div>
 </body>
