@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+        /*max-width: 600px;*/
+        margin: 0;
+        padding:0;
+    }
+    tbody tr:nth-child(odd) {
+        background-color: brown;
+    }
+    td:hover{
+        background-color: blue;
+        color: azure;
+    }
+    td:active{
+        background-color: brown;
+    }
+    table, thead, tbody, tr, th, td {
+        border: 1px solid black;
+    }
+    table{
+        border-collapse: separate;
+        border-spacing: 5px;
+        background: #000 url("gradient.gif") bottom left repeat-x;
+        color: #fff;
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    @media screen and (max-width:600px) {
+        table, thead, tbody, tr, th, td{
+            display: block;
+        }
+        thead {
+            display: none;
+        }
+        td {
+            padding-left: 50%;
+        }
+        
+        td:nth-child(1)::before{content: "Hora"; position: absolute; left: 10px;}
+        td:nth-child(2)::before{content: "Lunes"; position: absolute; left: 10px;}
+        td:nth-child(3)::before{content: "Martes"; position: absolute; left: 10px;}
+        td:nth-child(4)::before{content: "Miercoles"; position: absolute; left: 10px;}
+        td:nth-child(5)::before{content: "Jueves"; position: absolute; left: 10px;}
+        td:nth-child(6)::before{content: "Viernes"; position: absolute; left: 10px;}
+    }
+    
+    </style>
+</head>
+
+<body>
+    <center><h1>Tabla Responsiba</h1></center>
+    <table>
+        <thead>
+            <tr> <th>Hora</th><th>Lunes</th> <th>Martes</th><th>Miercoles</th><th>Jueves</th><th>Viernes</th> </tr>
+        </thead>
+        <tbody>
+            <center><tr> <td>7:00-8:00 a.m.</td><td>Programacion WEB</td> <td>Programacion WEB</td> <td>Programacion WEB</td> <td>Programacion WEB</td><td>Programacion WEB</td> </tr></center>
+            <center><tr> <td>8:00-9:00 a.m.</td><td>Arquitectura de PC</td> <td>Taller de S.O.</td> <td>Arquitectura de PC</td> <td>Taller de S.O.</td><td>Arquitectura de PC</td> </tr></center>
+            <center><tr> <td>9:00-10:00 a.m.</td><td>Libre</td> <td>Taller de S.O.</td> <td>Arquitectura de PC</td> <td>Taller de S.O.</td><td>Arquitectura de PC</td> </tr></center> 
+            <center><tr> <td>9:00-10:00 a.m.</td><td>Libre</td> <td>Taller de S.O.</td> <td>Arquitectura de PC</td> <td>Taller de S.O.</td><td>Arquitectura de PC</td> </tr></center>
+            <center><tr> <td>11:00-12:00 a.m.</td><td>Libre</td> <td>Libre</td> <td>Libre</td> <td>Libre</td><td>Libre</td> </tr> </center>
+            <center><tr> <td>12:00-1:00 p.m.</td><td>Fundamentos de Telecomunicaciones</td> <td>Ing. Software</td> <td>Fundamentos de Telecomunicaciones</td> <td>Ing. Software</td><td>Libre</td> </tr></center>
+            <center><tr> <td>1:00-2:00 p.m.</td><td>Fundamentos de Telecomunicaciones</td> <td>Ing. Software</td> <td>Fundamentos de Telecomunicaciones</td> <td>Ing. Software</td><td>Ing. Software</td> </tr></center>  
+        </tbody>
+    </table>
+</body>
+</html>
