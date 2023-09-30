@@ -51,3 +51,25 @@ Si declaramos una variable con var dentro de una funcion esta sera local a la fu
 | Undefine | C         |
 | Symbol   | C         |
 
+## Modulos
+|WEB           |Node         |
+|--------------|-------------|
+|Nativo/Ecma/Es|Conmonjs     |
+|export        |Module.export|
+|Import        |Requerie()   |
+
+### Como declarar una funcion en javascript
+```
+funtion nombre(__nombre){
+    return
+}
+```
+
+### Los objetos en javascript se representa como 
+```
+{
+    prop: valor
+    prop:valor
+}
+```
+**Que es un modulo:** Modulo que es un paquete javascript que exporta cosas
