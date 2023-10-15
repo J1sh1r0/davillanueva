@@ -1,0 +1,55 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f0f0f0;
+    background-color: gray;
+}
+.contenedor {
+    height: 100vh;
+    width: 100vw;
+    display: grid;
+    /*grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);*/
+    grid-template-columns: 25% 25% 25%;
+    grid-template-rows: 25% 25% 25%;
+    gap: 5px;
+    justify-content: center;
+}
+#caja11{
+    align-self: center;
+    justify-self: center;
+}
+.caja {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: brown;
+    border: 1px solid gray;
+    font-size: 60px;
+    text-align: center;
+    cursor: pointer;
+    color: #fff;
+}
+.jugador-X {
+    background-color: #3498db;
+}
+.jugador-O {
+    background-color: #4ca614;
+}
+#btn {
+    width: 100%;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+}

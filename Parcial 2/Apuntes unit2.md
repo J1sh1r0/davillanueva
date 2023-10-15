@@ -13,20 +13,21 @@
 ### Dialectos
 * Typescript
 
-**Donde pondremos el script?** Insertaremos el scrip como si fuera un CSS lo pondremos en un archivo aparte ligandolo al html o poniendolo dentro del Head  
+**Donde pondremos el script?** Insertaremos el scrip como si fuera un CSS lo pondremos en un archivo aparte ligandolo al html o poniendolo dentro del Head.  
 
+---
 ## Node.js
 * Funciones
 * Prop.
 * Window
 
 **Que es NPM?** Son los paquetes repositorio  
-
+---
 ## Framcworks
 * Angular
 * Vue
 * React
-
+---
 ## Tipos de Variables javascript
 * Var: La vemos solo en la funcion
 * Let: La vemos en el bloque de codigo donde este colocado
@@ -39,7 +40,7 @@ Si declaramos una variable con var dentro de una funcion esta sera local a la fu
 * Let es bloque  
 * Var es funcion  
 
-
+---
 ## Tipos de datos primitivos y objetos
 |Primitivos| Objetos   |
 |----------|-----------|
@@ -50,7 +51,7 @@ Si declaramos una variable con var dentro de una funcion esta sera local a la fu
 | Null     | C         |
 | Undefine | C         |
 | Symbol   | C         |
-
+---
 ## Modulos
 |WEB           |Node         |
 |--------------|-------------|
@@ -73,3 +74,19 @@ funtion nombre(__nombre){
 }
 ```
 **Que es un modulo:** Modulo que es un paquete javascript que exporta cosas
+
+---
+## Protocolo HTTP 
+**HTTP:** Protocolo de transferencia de Iper Texto, en si son puras peticiones.  
+
+**Metodos**
+* Get: Es una consulta en el navegador.
+* Post: Cuando enviaras informacion.
+* Put: Actualizar toda la base de datos.
+* DELETE: Borrar un elemento.
+* PATCH: Actualizar solo una parte de la base de datos.
+
+---
+## Formato para intercambiar unformacion
+* XML: Se usa cuando vas a transmitir datos al gobierno y archivos de config
+* JSON Java: Es as facil de implementar y el activo de internet
