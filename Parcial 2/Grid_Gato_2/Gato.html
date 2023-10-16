@@ -6,6 +6,7 @@
     <title>Juego del Gato</title>
     <link rel="stylesheet" href="Gato.css">
 </head>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.1.6/dist/sweetalert2.all.min.js"></script>
 <body>
     <div class="contenedor">
         <div class="caja" id="caja1"></div>
@@ -24,23 +25,67 @@
     <script>
         var xo = "X";
         var boxes = document.querySelectorAll('.caja');
+        var moves = 0;
         boxes.forEach(function(box) {
             box.addEventListener("click", function(e) {
                 if (box.innerText === "") {
+                    if (xo === "X") {
+                        xo = "O";
+                        box.classList.add("jugador-o");
+                    } else {
+                        xo = "X";
+                        box.classList.add("jugador-x");
+                    }
                     box.innerText = xo;
-                    box.classList.add(`jugador-${xo}`);
-                    xo = xo === "X" ? "O" : "X";
+                    moves++;
+                    // Verificar si hay un ganador o empate
+                    if (checkWinner()) {
+                        Swal.fire({
+                            title: `${xo} es el ganador!`,
+                            icon: 'success',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                resetGame();  // Reiniciar el juego
+                            }
+                        });
+                    } else if (moves === 9) {
+                        Swal.fire({
+                            title: 'Empate!',
+                            icon: 'info',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                resetGame();  // Reiniciar el juego
+                            }
+                        });
+                    }
                 }
             });
         });
-
-        document.getElementById("btn").addEventListener("click", function() {
+        function checkWinner() {
+            const winningCombinations = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],  // Horizontales
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],  // Verticales
+                [0, 4, 8], [2, 4, 6]             // Diagonales
+            ];
+            for (const combination of winningCombinations) {
+                const [a, b, c] = combination;
+                if (boxes[a].innerText && boxes[a].innerText === boxes[b].innerText && boxes[a].innerText === boxes[c].innerText) {
+                    return true;  // Hay un ganador
+                }
+            }
+            return false;  // No hay un ganador
+        }
+        function resetGame() {
+            xo = "X";
+            moves = 0;
             let cajas = document.getElementsByClassName("caja");
             for (const elemento of cajas) {
                 elemento.innerText = "";
-                elemento.classList.remove("jugador-X", "jugador-O");
+                elemento.classList.remove("jugador-x", "jugador-o");
             }
-        });
-    </script>
+        }
+      </script>
 </body>
 </html>

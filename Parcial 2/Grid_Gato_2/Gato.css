@@ -38,10 +38,10 @@ body {
     cursor: pointer;
     color: #fff;
 }
-.jugador-X {
+.jugador-x {
     background-color: #3498db;
 }
-.jugador-O {
+.jugador-o {
     background-color: #4ca614;
 }
 #btn {
