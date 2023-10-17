@@ -3,62 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="Estilo.css">
+    <title>Tabla de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            max-width: 800px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        th, td {
+            padding: 10px;
+            text-align: center;
+        }
+        th {
+            background-color: #3498db;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
 </head>
 <body>
+
     <div id="contenedor"></div>
     <script>
-        let encabezados=['Nombre','ApellidoP','ApellidoM'];
-        let datos = [{
-            nombre:"Dominic",
-            apellidop:"Villanueva",
-            apellidom:"Quevedo",
-        },{
-            nombre:"Ivan",
-            apellidop:"Rosales",
-            apellidom:"Cansino",
-        },{
-            nombre:"Alejandro",
-            apellidop:"Monsivais",
-            apellidom:"Guillen",
-        }];
-
-        let tab = document.createElement("table");
-        let enc = document.createElement("thead");
-        let fil = document.createElement("tr");
-
-        encabezados.forEach(elemento=>{ 
-            let th = document.createElement("th");
-            th.innerText = elemento;
-            fil.appendChild(th);
+        // Datos de ejemplo
+        const datos = [
+            { nombre: "Dominic", ApellidoP: "Villanueva", ApellidoM: "Quevedo" },
+            { nombre: "Yazmin", ApellidoP: "Bernabe", ApellidoM: "Lopez" },
+            { nombre: "Elio", ApellidoP: "Medrano", ApellidoM: "Morales" },
+            { nombre: "Alejandro", ApellidoP: "Monsivais", ApellidoM: "Guillen" },
+            { nombre: "Ivan", ApellidoP: "Rosales", ApellidoM: "Cansino" },
+            { nombre: "Julian", ApellidoP: "Gonzales", ApellidoM: "Medrano" },
+            { nombre: "Santiago", ApellidoP: "Sixto", ApellidoM: "Martinez" },
+            { nombre: "Ecson", ApellidoP: "Lumbreras", ApellidoM: "Acosta" },
+        ];
+        // Crear una tabla y un encabezado
+        const table = document.createElement("table");
+        const thead = document.createElement("thead");
+        const headerRow = document.createElement("tr");
+        // Agregar encabezados basados en las claves del primer objeto
+        for (const key in datos[0]) {
+            if (datos[0].hasOwnProperty(key)) {
+                const th = document.createElement("th");
+                th.textContent = key;
+                headerRow.appendChild(th);
+            }
+        }
+        thead.appendChild(headerRow);
+        table.appendChild(thead);
+        // Crear el cuerpo de la tabla
+        const tbody = document.createElement("tbody");
+        // Agregar filas de datos
+        datos.forEach((dato) => {
+            const row = document.createElement("tr");
+            for (const key in dato) {
+                if (dato.hasOwnProperty(key)) {
+                    const cell = document.createElement("td");
+                    cell.textContent = dato[key];
+                    row.appendChild(cell);
+                }
+            }
+            tbody.appendChild(row);
         });
-
-        enc.appendChild(fil);
-        tab.appendChild(enc);
-
-        tbody= document.createElement("tbody");
-
-        datos.forEach(function(elemento){
-            let fila = document.createElement("tr");
-
-            let td1 = document.createElement("td");
-            td1.innerText=elemento.nombre;
-            fila.appendChild(td1);
-
-            let td2 = document.createElement("td");
-            td2.innerText=elemento.apellidop;
-            fila.appendChild(td2);
-
-            let td3 = document.createElement("td");
-            td3.innerText=elemento.apellidom;
-            fila.appendChild(td3);
-            tbody.appendChild(fila);
-        });
-        
-        tab.appendChild(tbody);
-
-        document.getElementById("contenedor").appendChild(tab);
+        table.appendChild(tbody);
+        // Agregar la tabla al contenedor en el DOM
+        const contenedor = document.getElementById("contenedor");
+        contenedor.appendChild(table);
     </script>
 </body>
 </html>
