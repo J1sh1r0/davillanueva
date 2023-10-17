@@ -90,3 +90,19 @@ funtion nombre(__nombre){
 ## Formato para intercambiar unformacion
 * XML: Se usa cuando vas a transmitir datos al gobierno y archivos de config
 * JSON Java: Es as facil de implementar y el activo de internet
+
+---
+## Ciclos de JavaScript
+* Ciclo for of: Objetos interables
+* Ciclo for in: Interar sobre propiedades de objetos
+---
+## Metodos
+* array.forEach: Ciclos que actian sobre los array
+* objetoJQuery.each
+---
+## DOM API
+* getElementById: Objetos de la id.
+* querySelector: Objeto que cumpla con el selector primero
+* getElementTagName: Elementos que tengan la etiqueta Tag
+* getElementClassName: Elementos que tengan la clase "Nombre_Clase"
+
