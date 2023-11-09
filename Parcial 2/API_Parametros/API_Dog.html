@@ -60,10 +60,10 @@
     </style>
 </head>
 <body>
-    <h1>API de Perros</h1>
-    <button id="getRandomDog">Obtener imagen aleatoria</button>
+    <h1>API de Perros</h1> <!--Titulo de la Pagina-->
+    <button id="getRandomDog">Obtener imagen aleatoria</button><!--Boton para obtener imagen aleatoria-->
     <select id="breedSelector"></select> <!-- Las opciones de razas se cargarán aquí -->
-    <button id="getBreedImages">Obtener imágenes de la raza</button>
+    <button id="getBreedImages">Obtener imágenes de la raza</button><!--Boton para obtener las imagenes de la raza seleccionada-->
     <div id="dogImages"></div> <!-- Las imágenes de perros se mostrarán aquí -->
 
     <script>
@@ -88,7 +88,7 @@
         //Cuando se selecciona he hace solicitud al API y se obtiene la imagen del perro aleatorio
         getRandomDogButton.addEventListener("click", () => {
             fetch("https://dog.ceo/api/breeds/image/random")
-                .then((response) => response.json())
+                .then((response) => response.json())//Convierte la respuesta en un objeto JSON.
                 .then((data) => {
                     const imageUrl = data.message;//se muestra esa imagen en el área destinada para las imágenes de perros
                     dogImages.innerHTML = `
@@ -100,26 +100,26 @@
                 });
         });
 
-        //Se verifica qué raza de perro se ha seleccionado en el menú desplegable
+        //Se verifica qué raza de perro se ha seleccionado en el menú desplegable.
         getBreedImagesButton.addEventListener("click", () => {
             const selectedBreed = breedSelector.value;
             if (selectedBreed) {
                 fetch(`https://dog.ceo/api/breed/${selectedBreed}/images`)
-                    .then((response) => response.json())
+                    .then((response) => response.json())//Convierte la respuesta en un objeto JSON.
                     .then((data) => {
                         if (data.status === "success") {
                             const breedImages = data.message;
                             dogImages.innerHTML = breedImages.map((imageUrl) => `
                                 <img src="${imageUrl}" alt="${selectedBreed}">
                             `).join('');
-                        } else {
+                        } else {//Manejo de errores.
                             alert("No se pudieron obtener imágenes de la raza seleccionada.");
                         }
                     })
                     .catch((error) => {//Manejo de errores.
                         console.error("Error:", error);
                     });
-            } else {
+            } else {//Mensaje de aviso de seleccionar raza
                 alert("Selecciona una raza de perro primero.");
             }
         });
