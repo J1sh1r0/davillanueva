@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chuck Norris</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: gray;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: brown;
+            color: white;
+            padding: 20px;
+            margin: 0;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        select, button {
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid whitesmoke;
+            border-radius: 5px;
+            margin: 5px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkgreen;
+        }
+
+        #jokeResult {
+            background-color: white;
+            border: 1px solid whitesmoke;
+            border-radius: 5px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Chuck Norris</h1>
+
+    <form id="jokeForm">
+        <label for="category">Selecciona una categoría:</label>
+        <select id="category" name="category"></select>
+        <button type="submit">Obtener chiste</button>
+    </form>
+
+    <div id="jokeResult"></div>
+
+    <script>
+        const categorySelect = document.getElementById("category"); //Una variable para acceder al elemento select del formulario.
+        const jokeForm = document.getElementById("jokeForm"); //Una variable para acceder al elemento del formulario.
+        const jokeResult = document.getElementById("jokeResult"); //Una variable para acceder al elemento donde se mostrará el resultado del chiste.
+
+        // Obtener las categorías desde la API de Chuck Norris
+        fetch("https://api.chucknorris.io/jokes/categories")
+            .then((response) => response.json()) //Convierte la respuesta a un objeto JSON.
+            .then((categories) => { //Itera a través de las categorías y crea opciones para el elemento select.
+                categories.forEach((category) => {
+                    const option = document.createElement("option");
+                    option.value = category;
+                    option.textContent = category;
+                    categorySelect.appendChild(option);
+                });
+            })
+            .catch((error) => {//catch para errores
+                console.error("Error al cargar las categorías:", error);
+            });
+
+            //Esto permite detectar cuándo el formulario se envía.
+            jokeForm.addEventListener("submit", (e) => {
+            e.preventDefault(); //Previene el comportamiento por defecto de enviar el formulario, lo que haría que la página se recargue.
+
+            //Obtiene la categoría seleccionada en el elemento select.
+            const selectedCategory = categorySelect.value;
+
+            if (selectedCategory) {
+                // Hacer una petición para obtener un chiste de la categoría seleccionada
+                fetch(`https://api.chucknorris.io/jokes/random?category=${selectedCategory}`)
+                    .then((response) => response.json()) //Convierte la respuesta en un objeto JSON.
+                    .then((joke) => {//Muestra el chiste en la página.
+                        jokeResult.innerHTML = `<p>${joke.value}</p>`;
+                    })
+                    .catch((error) => { //Manejo de errores
+                        console.error("Error al obtener el chiste:", error);
+                        jokeResult.innerHTML = "No se pudo obtener el chiste.";
+                    });
+            }
+        });
+    </script>
+</body>
+</html>

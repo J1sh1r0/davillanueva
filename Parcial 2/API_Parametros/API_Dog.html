@@ -67,15 +67,15 @@
     <div id="dogImages"></div> <!-- Las imágenes de perros se mostrarán aquí -->
 
     <script>
-        const getRandomDogButton = document.getElementById("getRandomDog");
-        const breedSelector = document.getElementById("breedSelector");
-        const getBreedImagesButton = document.getElementById("getBreedImages");
-        const dogImages = document.getElementById("dogImages");
+        const getRandomDogButton = document.getElementById("getRandomDog");//Captura el boton "Obtener imagen aleatorio".
+        const breedSelector = document.getElementById("breedSelector");//Captura el meno desplegable que permite seleccionar una raza.
+        const getBreedImagesButton = document.getElementById("getBreedImages");//Captura el boton de "Obtener imagenes de raza".
+        const dogImages = document.getElementById("dogImages");//Captura el area donde se mostrara las imagenes de los perros.
 
         // Obtener la lista de razas disponibles
         fetch("https://dog.ceo/api/breeds/list/all")
-            .then((response) => response.json())
-            .then((data) => {
+            .then((response) => response.json())//Convierte la respuesta en un objeto JSON.
+            .then((data) => { 
                 const breeds = Object.keys(data.message);
                 breeds.forEach((breed) => {
                     const option = document.createElement("option");
@@ -85,20 +85,22 @@
                 });
             });
 
+        //Cuando se selecciona he hace solicitud al API y se obtiene la imagen del perro aleatorio
         getRandomDogButton.addEventListener("click", () => {
             fetch("https://dog.ceo/api/breeds/image/random")
                 .then((response) => response.json())
                 .then((data) => {
-                    const imageUrl = data.message;
+                    const imageUrl = data.message;//se muestra esa imagen en el área destinada para las imágenes de perros
                     dogImages.innerHTML = `
                         <img src="${imageUrl}" alt="Random Dog">
                     `;
                 })
-                .catch((error) => {
+                .catch((error) => {//Manejo de errores.
                     console.error("Error:", error);
                 });
         });
 
+        //Se verifica qué raza de perro se ha seleccionado en el menú desplegable
         getBreedImagesButton.addEventListener("click", () => {
             const selectedBreed = breedSelector.value;
             if (selectedBreed) {
@@ -114,7 +116,7 @@
                             alert("No se pudieron obtener imágenes de la raza seleccionada.");
                         }
                     })
-                    .catch((error) => {
+                    .catch((error) => {//Manejo de errores.
                         console.error("Error:", error);
                     });
             } else {
