@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub API Example</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            background-color: maroon;
+            color: white;
+            padding: 20px;
+        }
+
+        #getUserInfo {
+            background-color: darkgreen;
+            color: white;
+            padding: 10px 20px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #userInfo {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        p {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Información de mi Token</h1>
+    <button id="getUserInfo">Obtener información</button>
+    <div id="userInfo"></div>
+
+    <script>
+        const accessToken = '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';
+
+        document.getElementById('getUserInfo').addEventListener('click', () => {
+            fetch('https://api.github.com/user', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                const userInfoDiv = document.getElementById('userInfo');
+                userInfoDiv.innerHTML = `
+                    <p>Nombre de usuario: ${data.login}</p>
+                    <p>ID: ${data.id}</p>
+                    <p>Nombre: ${data.name}</p>
+                    <p>Repositorios públicos: ${data.public_repos}</p>
+                    <p>Seguidores: ${data.followers}</p>
+                `;
+            })
+            .catch(error => {
+                console.error('Error al obtener información del usuario:', error);
+                const userInfoDiv = document.getElementById('userInfo');
+                userInfoDiv.innerHTML = 'No se pudo obtener la información del usuario.';
+            });
+        });
+    </script>
+</body>
+</html>
