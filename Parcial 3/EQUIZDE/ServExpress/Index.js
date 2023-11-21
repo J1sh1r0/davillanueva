@@ -1,5 +1,8 @@
 const exprees = require('express');
+const cors = require('cors');
+
 const app = exprees();
+app.use(cors());
 
 app.get('/',(req,res)=>{
     console.log(req.query);
