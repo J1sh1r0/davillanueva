@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+
+
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+
+
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        .error-message {
+            color: #ff0000;
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form>
+            <center>
+                <h1>CONSULTA MANGAS</h1>
+            </center>
+            <div class="form-group">
+                <label for="idUsuario">ID</label>
+                <input id="idUsuario" type="text"><br>
+            </div>
+            <div class="form-group">
+                <label for="nombreP">Nombre</label>
+                <input id="nombreP" type="text"><br>
+            </div>
+            <div class="form-group">
+                <label for="generoP">Genero</label>
+                <input id="generoP" type="text"><br>
+            </div>
+            <div class="form-group">
+                <label for="FEstreno">Fecha de Estreno</label>
+                <input id="FEstreno" type="text"><br>
+            </div>
+            <div class="form-group">
+                <label for="CanCapitulos">Cant Capitulos</label>
+                <input id="CanCapitulos" type="text"><br>
+            </div>
+            <button id="btnConsulta" type="button">Consultar</button>
+            <button id="btnBorrar" type="button">Borrar</button>
+            <button id="btnAgregar" type="button">Agregar</button>
+            <button id="btnModificar" type="button">Modificar</button>
+            <button id="btnLimpiar" type="button">Limpiar</button>
+
+            <div id="mensaje" class="error-message"></div>
+        </form>
+    </div>
+    <div class="container mt-5">
+        <table class="table">
+            <thead>
+                <tr id="table-headers"></tr>
+            </thead>
+            <tbody id="table-body"></tbody>
+        </table>
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        //CONSULTA
+        document.getElementById("btnConsulta").addEventListener("click", function () {
+
+            Swal.fire({
+                title: 'Ingrese el ID ',
+                input: 'text',
+                showCancelButton: true,
+                confirmButtonText: 'Consultar',
+                cancelButtonText: 'Cancelar',
+                showLoaderOnConfirm: true,
+                preConfirm: (id) => {
+                    // Aquí puedes realizar la lógica de consulta con el ID ingresado
+                    //return fetch('http://localhost:8082/manga/' + ID)
+                    return fetch('http://localhost:8082/manga/' + id)
+                        .then(response => response.json())
+                        .then(Objeto => {
+                            if (Objeto.estado === 1) {
+                                // Mostrar los datos 
+                                document.getElementById("idUsuario").value = Objeto.resultado.ID;
+                                document.getElementById("nombreP").value = Objeto.resultado.Nombre;
+                                document.getElementById("generoP").value = Objeto.resultado.Generos;
+                                document.getElementById("FEstreno").value = Objeto.resultado.FechaEstreno;
+                                document.getElementById("CanCapitulos").value = Objeto.resultado.CantCapitulos;
+                                // Mensaje en el DIV
+                                document.getElementById("mensaje").innerHTML = 'Consulta realizada de manera exitosa.';
+                                Swal.fire(
+                                    '¡Buen trabajo!',
+                                    'Has realizado la consulta exitosamente.',
+                                    'success'
+                                );
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'Algo salió mal en la consulta.',
+                                    footer: '<a href="">El ID no existe en la Base de Datos</a>'
+                                });
+                            }
+                        })
+                        .catch(error => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Ocurrió un error al realizar la consulta.',
+                            });
+                        });
+                }
+            });
+        });
+
+        // BORRAR
+        document.getElementById("btnBorrar").addEventListener("click", function () {
+            let id = document.getElementById("idUsuario").value;
+            // Verificar si los campos están vacíos
+            if (id.trim() === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Ingrese el ID.',
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: '¿Estás seguro?',
+                text: "¡No podrás revertir esto!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, eliminarlo'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    fetch('http://localhost:8082/manga/' + id, { method: "DELETE" })
+                        .then(respuesta => respuesta.json())
+                        .then(ObjetoGenero => {
+                            if (ObjetoGenero.estado == 1) {
+
+                                document.getElementById("nombreP").value = '';
+                                document.getElementById("idUsuario").value = '';
+                                document.getElementById("generoP").value = '';
+                                document.getElementById("FEstreno").value = '';
+                                document.getElementById("CanCapitulos").value = '';
+                                Swal.fire(
+                                    '¡Eliminado!',
+                                    'Manga  eliminado exitosamente.',
+                                    'success'
+                                );
+
+                                document.getElementById("mensaje").innerHTML = "Manga Eliminado.";
+                            } else {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: 'El ID no existe.',
+                                });
+                            }
+                        });
+                }
+            });
+
+        });
+
+        //ALTA-Agregar
+        document.getElementById("btnAgregar").addEventListener("click", function () {
+
+            let Id = document.getElementById("idUsuario").value;
+            let Nombre = document.getElementById("nombreP").value;
+            let Genero = document.getElementById("generoP").value;
+            let FechaEstreno = document.getElementById("FEstreno").value;
+            let Capitulos = document.getElementById("CanCapitulos").value;
+
+
+            // Verificar si los campos están vacíos
+            if (Id.trim() === '' || Nombre.trim() === '' || Genero.trim() === '' || FechaEstreno.trim() === '' || Capitulos.trim() === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error: Todos los campos deben estar completos'
+                });
+                return;
+            }
+
+            // Crear un objeto con los datos del nuevo género
+            let nuevo = {
+                Id: Id,
+                Nombre: Nombre,
+                Genero: Genero,
+                FechaEstreno: FechaEstreno,
+                Capitulos: Capitulos
+            };
+
+            // Realizar la solicitud POST al servidor
+            fetch('http://localhost:8082/manga', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(nuevo)
+            })
+                .then(respuesta => respuesta.json())
+                .then(resultado => {
+                    console.log(resultado);
+
+                    // Limpiar los campos del formulario
+                    document.getElementById("idUsuario").value = "";
+                    document.getElementById("nombreP").value = "";
+                    document.getElementById("generoP").value = "";
+                    document.getElementById("FEstreno").value = "";
+                    document.getElementById("CanCapitulos").value = "";
+
+                    Swal.fire(
+                        '¡Agregado!',
+                        'Manga agregado exitosamente.',
+                        'success'
+                    );
+                    document.getElementById("mensaje").innerHTML = "Manga agregado exitosamente.";
+                });
+        });
+
+        // MODIFICAR
+        // document.getElementById("btnModificar").addEventListener("click", function () {
+        //     let Id = document.getElementById("idUsuario").value;
+        //     let Nombre = document.getElementById("nombreP").value;
+        //     let Genero = document.getElementById("generoP").value;
+        //     let FechaEstreno = document.getElementById("FEstreno").value;
+        //     let Capitulos = document.getElementById("CanCapitulos").value;
+        //     // Verificar si los campos están vacíos
+        //     if (Id.trim() === '' || Nombre.trim() === '' || Genero.trim() === '' || FechaEstreno.trim() === '' || Capitulos.trim() === '') {
+        //         Swal.fire({
+        //             icon: 'error',
+        //             title: 'Oops...',
+        //             text: 'Error: Todos los campos deben estar completos'
+        //         });
+        //         return;
+        //     }
+        //     // Crear un objeto con los datos del nuevo género musical
+        //     let nuevo = {
+        //         Id: Id,
+        //         Nombre: Nombre,
+        //         Genero: Genero,
+        //         FechaEstreno: FechaEstreno,
+        //         Capitulos: Capitulos
+        //     };
+        //     // Realizar la solicitud POST al servidor
+        //     fetch('http://localhost:8082/manga/' + document.getElementById("idUsuario").value, {
+        //         method: 'PUT',
+        //         headers: {
+        //             'Content-Type': 'application/json' //envia un ojbeto al body
+        //         },
+        //         body: JSON.stringify(nuevo) //lo convierte a una cadena JSON
+        //     })
+        //         .then(respuesta => respuesta.json())
+        //         .then(resultado => {
+        //             console.log(resultado);
+        //             Swal.fire(
+        //                 '¡Modificado!',
+        //                 'Manga modificado exitosamente.',
+        //                 'success'
+        //             );
+        //         });
+        //     document.getElementById("mensaje").innerHTML = "Manga modificado exitosamente.";
+        // });
+
+        //LIMPIAR LOS LABEL
+        document.getElementById("btnModificar").addEventListener("click", function () {
+            let Id = document.getElementById("idUsuario").value;
+            let Nombre = document.getElementById("nombreP").value;
+            let Genero = document.getElementById("generoP").value;
+            let FechaEstreno = document.getElementById("FEstreno").value;
+            let Capitulos = document.getElementById("CanCapitulos").value;
+
+            // Verificar si los campos están vacíos
+            if (Id.trim() === '' || Nombre.trim() === '' || Genero.trim() === '' || FechaEstreno.trim() === '' || Capitulos.trim() === '') {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Error: Todos los campos deben estar completos'
+                });
+                return;
+            }
+            // Crear un objeto con los datos del nuevo género musical
+            let nuevoGenero = {
+                Id: Id,
+                Nombre: Nombre,
+                Genero: Genero,
+                FechaEstreno: FechaEstreno,
+                Capitulos: Capitulos
+            };
+
+            // Realizar la solicitud POST al servidor
+            fetch('http://localhost:8082/manga/' + document.getElementById("idUsuario").value, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json' //envia un ojbeto al body
+                },
+                body: JSON.stringify(nuevoGenero) //lo convierte a una cadena JSON 
+            })
+                .then(respuesta => respuesta.json())
+                .then(resultado => {
+                    console.log(resultado);
+                    Swal.fire(
+                        '¡Modificado!',
+                        'El género musical ha sido modificado exitosamente.',
+                        'success'
+                    );
+                });
+            //alert(datojson.resultado);
+            //let mensaje = alert("Género musical MODIFICADO exitosamente.");
+            document.getElementById("mensaje").innerHTML = "Género musical MODIFICADO exitosamente.";
+        });
+
+
+
+
+        document.getElementById("btnLimpiar").addEventListener("click", function () {
+
+            // Limpiar los campos del formulario
+            document.getElementById("idUsuario").value = "";
+            document.getElementById("nombreP").value = "";
+            document.getElementById("generoP").value = "";
+            document.getElementById("FEstreno").value = "";
+            document.getElementById("CanCapitulos").value = "";
+        });
+    </script>
+</body>
+
+</html>

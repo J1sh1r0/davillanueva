@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bootstrap</title>
+  <link rel="stylesheet" href="./bootstrap.min.css" />
+</head>
+<body>
+<div class="container mt-5">
+  <table class="table">
+    <thead>
+      <tr id="table-headers"></tr>
+    </thead>
+    <tbody id="table-body"></tbody>
+  </table>
+</div>
+<script src="./bootstrap.min.js"></script>
+<script>
+fetch('http://localhost:8082/datos')
+  .then(response => response.json())
+  .then(data => {
+    const headers = Object.keys(data[0]);
+    const tableHeaders = document.getElementById('table-headers');
+    headers.forEach(header => {
+      const th = document.createElement('th');
+      th.textContent = header;
+      tableHeaders.appendChild(th);
+    });
+ 
+    const tableBody = document.getElementById('table-body');
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      headers.forEach(header => {
+        const td = document.createElement('td');
+        td.textContent = row[header];
+        tr.appendChild(td);
+      });
+      tableBody.appendChild(tr);
+    });
+  })
+  .catch(error => console.error('Error al obtener datos:', error));
+</script>
+</body>
+</html>

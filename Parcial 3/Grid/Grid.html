@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid.js</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@2.0.0/dist/theme/mermaid.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gridjs@2.0.0"></script>
+</head>
+<body>
+<div id="grid"></div>
+
+<script>
+fetch('http://localhost:8082/datos')
+  .then(response => response.json())
+  .then(data => {
+    new gridjs.Grid({
+      columns: Object.keys(data[0]).map(key => ({ name: key, id: key })),
+      data: data,
+    }).render(document.getElementById('grid'));
+  })
+  .catch(error => console.error('Error al obtener datos:', error));
+</script>
+</body>
+</html>

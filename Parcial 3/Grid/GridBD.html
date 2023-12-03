@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grid.js</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/gridjs@2.0.0/dist/theme/mermaid.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/gridjs@2.0.0"></script>
+</head>
+<body>
+  <div>
+    <label for="userId">Ingresar ID:</label>
+    <input type="text" id="userId" />
+    <button id="fetchDataButton">Obtener Datos</button>
+  </div>
+  <div id="grid"></div>
+
+  <script>
+    // Función para obtener datos por ID
+    function fetchDataById(userId) {
+      fetch(`http://localhost:8082/datos/${userId}`)
+        .then(response => response.json())
+        .then(data => {
+          new gridjs.Grid({
+            columns: Object.keys(data[0]).map(key => ({ name: key, id: key })),
+            data: data,
+          }).render(document.getElementById('grid'));
+        })
+        .catch(error => console.error('Error al obtener datos:', error));
+    }
+
+    // Evento click para el botón
+    document.getElementById('fetchDataButton').addEventListener('click', () => {
+      const userId = document.getElementById('userId').value;
+      if (userId) {
+        fetchDataById(userId);
+      } else {
+        console.error('Por favor, ingrese un ID válido.');
+      }
+    });
+  </script>
+</body>
+</html>
